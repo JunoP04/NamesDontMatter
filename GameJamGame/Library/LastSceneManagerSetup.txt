@@ -1,7 +1,5 @@
 sceneSetups:
-
-- path: Assets/Brandonnn/Scenes/MainMenu.unity
-
+- path: Assets/Brandonnn/Scenes/BrandonScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
