@@ -27,7 +27,7 @@ public class DebrisUpgrades : MonoBehaviour
         if (distance <= 3.0f)
         {
             debrisItem.transform.position = Vector2.MoveTowards(transform.position, player.transform.position, 2.0f * Time.deltaTime);
-            if (distance <= 0)
+            if (distance <= 0.7f)
             {
                 StickToShip(debrisItem);
             }
