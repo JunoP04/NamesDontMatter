@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/JunoP/Scenes/JunosScene.unity
+- path: Assets/Braaaaaaaaandon/Scenes/BrandonScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
