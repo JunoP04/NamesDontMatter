@@ -9,7 +9,7 @@ public class ShipMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log(Screen.width + " " + Screen.height);
     }
 
     // Update is called once per frame
@@ -20,24 +20,35 @@ public class ShipMovement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal") * moveSpeed;
         transform.Translate(moveHorizontal * Time.deltaTime, moveVertical * Time.deltaTime, 0);
 
-        // X axis
-        if (transform.position.x <= -10.0f)
+        //Gets screen size and coordinates
+        Vector3 screenPos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width,Screen.height, 0));
+        float screenPosX = screenPos.x;
+        float screenPosY = screenPos.y;
+
+        //X axis boundaries
+        if (transform.position.x <= 0)
         {
-            transform.position = new Vector2(-10.0f, transform.position.y);
-        }
-        else if (transform.position.x >= 10.0f)
-        {
-            transform.position = new Vector2(10.0f, transform.position.y);
+            transform.position = new Vector3(0, transform.position.y,0);
+            print("Left bounds");
         }
 
-        // Y axis
-        if (transform.position.y <= -4.5f)
+        if (transform.position.x >= (screenPosX * 2 ))
         {
-            transform.position = new Vector2(transform.position.x, -4.5f);
+            transform.position = new Vector3(screenPosX * 2, transform.position.y,0);
+            print("Right bounds");
         }
-        else if (transform.position.y >= 6.5f)
+
+        //Y axis boundaries
+        if (transform.position.y <= 0)
         {
-            transform.position = new Vector2(transform.position.x, 6.5f);
+            transform.position = new Vector3(transform.position.x, 0, 0);
+            print("Bottom bounds");
+        }
+
+        if (transform.position.y >= (screenPosY * 2))
+        {
+            transform.position = new Vector3(transform.position.x, screenPosY * 2, 0);
+            print("Top bounds");
         }
     }
 }
