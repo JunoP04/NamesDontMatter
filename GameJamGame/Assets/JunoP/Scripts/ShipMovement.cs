@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
 {
-    public float moveSpeed = 3f;
+    public float moveSpeed = 8.5f;
     public float speed = 5f;
+    public float acceleration = 1f;
+
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -16,12 +19,17 @@ public class ShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Rigidbody2D rigid2d = player.GetComponent<Rigidbody2D>();
         //Movement of the ship
-        transform.Translate(0, moveSpeed * Time.deltaTime, 0);
-        Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.back);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            rigid2d.velocity = (transform.up * speed);
+            Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.back);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
+        }
+    
 
         //Gets screen size and coordinates
         Vector3 screenPos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width,Screen.height, 0));
@@ -54,4 +62,14 @@ public class ShipMovement : MonoBehaviour
             print("Top bounds");
         }
     }
+
+    private IEnumerator Deaccelerate()
+    {
+        for (float ft = 3.0f; ft >= 0; ft -= 0.1f)
+        {
+            moveSpeed = ft;
+        }
+        yield return null;
+    }
+
 }

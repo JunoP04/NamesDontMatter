@@ -239,7 +239,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 9.886642
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -465,6 +465,7 @@ GameObject:
   - component: {fileID: 860765108}
   - component: {fileID: 860765107}
   - component: {fileID: 860765106}
+  - component: {fileID: 860765111}
   - component: {fileID: 860765110}
   - component: {fileID: 860765109}
   m_Layer: 0
@@ -487,6 +488,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8.5
+  speed: 8.5
+  acceleration: 1
+  player: {fileID: 860765105}
 --- !u!212 &860765107
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -558,14 +562,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860765105}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_LinearDrag: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -597,6 +601,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &860765111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860765105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12c5e6604a99e0249b4fda1eb81f0fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerProj: {fileID: 6062616545280997015, guid: 516b3ceedc98e12439baf714f88a3110,
+    type: 3}
+  player: {fileID: 860765105}
+  enemy: {fileID: 898303797}
+  bulletSpeed: 25
+  canShoot: 1
 --- !u!1 &898303797
 GameObject:
   m_ObjectHideFlags: 0
