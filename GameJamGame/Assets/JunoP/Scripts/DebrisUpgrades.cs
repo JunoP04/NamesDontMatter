@@ -24,20 +24,26 @@ public class DebrisUpgrades : MonoBehaviour
     {
         float distance = Vector2.Distance(debrisItem.transform.position, player.transform.position);
 
-        if (distance <= 3.0f)
+        if (distance <= 3.0f && debrisItem.transform.parent != player.transform)
         {
             debrisItem.transform.position = Vector2.MoveTowards(transform.position, player.transform.position, 2.0f * Time.deltaTime);
-            if (distance <= 0.7f)
-            {
-                StickToShip(debrisItem);
-            }
         }
     }
 
-    void StickToShip(GameObject debris)
+    void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.gameObject.tag == "Player")
+        {
+            StickToShip();
+        }
+        else if (col.gameObject.tag == "Debris" && col.transform.parent == player.transform)
+        {
+            StickToShip();
+        }
+    }
 
-        debris.transform.parent = player.transform;
-        
+    void StickToShip()
+    { 
+        debrisItem.transform.parent = player.transform;
     }
 }
